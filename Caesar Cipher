@@ -1,1 +1,31 @@
+from string import ascii_lowercase
 
+LOWER_OFFSET = 97
+UPPER_OFFSET = 65
+
+
+def encrypt(plaintext: str, key: int) -> str:
+    """
+    Simple, easy-to-read implementation of the Caesar Cipher
+    Encrypts upper- and lower-case English letters.
+    :param plaintext: str
+    :param key: int
+    :return: str
+    """
+
+    ciphertext = ""
+    for char in plaintext:
+        if char.isupper():
+            char = ord(char) - UPPER_OFFSET
+            char = (char + key) % 26
+            char = char + UPPER_OFFSET
+            ciphertext += chr(char)
+        elif char.islower():
+            char = ord(char) - LOWER_OFFSET
+            char = (char + key) % 26
+            char = char + LOWER_OFFSET
+            ciphertext += chr(char)
+        else:
+            ciphertext += char
+
+    return ciphertext
